@@ -8,7 +8,7 @@ export function Footer() {
       <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
         
         <div className="text-2xl font-black tracking-tighter text-foreground">
-          أحمد<span className="text-primary">.ديف</span>
+          هاشم<span className="text-primary">.الروابدة</span>
         </div>
         
         <p className="text-muted-foreground flex items-center gap-1 text-sm md:text-base text-center">

@@ -104,7 +104,7 @@ export function Contact() {
                     id="name" 
                     required
                     className="w-full bg-background border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
-                    placeholder="أحمد محمد"
+                    placeholder="هاشم الروابدة"
                   />
                 </div>
                 <div className="space-y-2">

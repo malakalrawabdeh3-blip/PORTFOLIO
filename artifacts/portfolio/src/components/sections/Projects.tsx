@@ -121,7 +121,7 @@ export function Projects() {
             rel="noreferrer"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border-2 border-primary text-primary font-bold hover:bg-primary hover:text-primary-foreground transition-all"
           >
-            مشاهدة المزيد على GitHub
+مشاهدة المزيد من الأعمال
             <FiGithub className="text-xl" />
           </motion.a>
         </div>

@@ -61,7 +61,7 @@ export function Navbar() {
           onClick={(e) => scrollToSection(e, "#home")}
           className="text-2xl font-black tracking-tighter text-foreground"
         >
-          أحمد<span className="text-primary">.ديف</span>
+          هاشم<span className="text-primary">.الروابدة</span>
         </a>
 
         {/* Desktop Nav */}

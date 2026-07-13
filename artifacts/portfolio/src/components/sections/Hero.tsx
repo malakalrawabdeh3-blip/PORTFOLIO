@@ -103,7 +103,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto md:mx-0 leading-relaxed"
           >
-            أنا أحمد، أدمج بين الكود النظيف والتصميم المذهل لبناء منتجات تترك انطباعاً لا يُنسى. دعنا نصنع المستقبل معاً.
+            أنا هاشم، أدمج بين الكود النظيف والتصميم المذهل لبناء منتجات تترك انطباعاً لا يُنسى. دعنا نصنع المستقبل معاً.
           </motion.p>
 
           <motion.div 
