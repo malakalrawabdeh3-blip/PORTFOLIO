@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiGithub, FiTwitter, FiLinkedin, FiMail, FiArrowDown, FiCamera, FiEdit2, FiCheck } from "react-icons/fi";
 import { FaCode } from "react-icons/fa";
 import { useSiteName } from "@/components/site-name-provider";
+import { useProfilePhoto } from "@/components/profile-photo-provider";
 
 const roles = [
   "مطور واجهات أمامية",
@@ -14,9 +15,9 @@ const roles = [
 
 export function Hero() {
   const { name, setName } = useSiteName();
+  const { photo: profileImage, setPhoto: setProfileImage } = useProfilePhoto();
   const [isEditingName, setIsEditingName] = useState(false);
   const [nameInput, setNameInput] = useState(name);
-  const [profileImage, setProfileImage] = useState<string>("/hero-portrait.jpg");
   const [roleIndex, setRoleIndex] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -28,13 +29,6 @@ export function Hero() {
     setName(nameInput);
     setIsEditingName(false);
   };
-
-  useEffect(() => {
-    const savedImage = localStorage.getItem("portfolio-profile-image");
-    if (savedImage) {
-      setProfileImage(savedImage);
-    }
-  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {

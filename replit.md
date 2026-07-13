@@ -1,45 +1,46 @@
-# [Project name]
+# هاشم الروابدة — Portfolio
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+موقع بورتفوليو شخصي عربي بالكامل (RTL)، بتصميم عصري وحركات Framer Motion، يعرض المهارات والمشاريع والخبرات، ويتيح للزائر ربط حساب Google لتخصيص الاسم والصورة المعروضة على الموقع تلقائياً.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
-- `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+- `pnpm --filter @workspace/portfolio run dev` — واجهة الموقع (React + Vite)
+- `pnpm --filter @workspace/api-server run dev` — خادم API (يحمل بروكسي Clerk فقط حالياً، لا قاعدة بيانات)
+- `pnpm run typecheck` — فحص الأنواع لكل الحزم
 
 ## Stack
 
-- pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- pnpm workspaces, React + Vite, TailwindCSS v4, Framer Motion, React Icons
+- Auth: Clerk (Replit-managed) — Google SSO + email/password
+- لا قاعدة بيانات مستخدمة؛ الموقع بالكامل عرض واجهة أمامية بدون بيانات خلفية
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/portfolio` — الموقع (كل الأقسام في `src/components/sections/`)
+- `artifacts/portfolio/src/components/auth/` — بوابة الربط بجوجل (`link-account-gate.tsx`)، مزامنة الهوية (`clerk-identity-sync.tsx`)، مظهر Clerk (`clerk-appearance.ts`)
+- `artifacts/portfolio/src/components/site-name-provider.tsx` — الاسم المعروض على الموقع (قابل للتعديل يدوياً أو تلقائياً عبر Clerk)
+- `artifacts/portfolio/src/components/profile-photo-provider.tsx` — الصورة الشخصية المعروضة (رفع يدوي أو تلقائي عبر Clerk)
+- `artifacts/api-server/src/middlewares/clerkProxyMiddleware.ts` — بروكسي Clerk للإنتاج
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- الاسم والصورة الرئيسية على الموقع يديرهما Context مشترك (`SiteNameProvider` / `ProfilePhotoProvider`) محفوظ في `localStorage`، بدلاً من الحالة المحلية بكل مكوّن — يسمح بالتحديث من أي مصدر (تعديل يدوي، رفع صورة، أو تسجيل دخول Google).
+- بوابة ربط الحساب (`LinkAccountGate`) تظهر مرة واحدة لكل جلسة قبل الصفحة الرئيسية، لكنها **لا تحجب** الزوار — دائماً يوجد خيار "متابعة كزائر" لأن الصفحة الرئيسية يجب أن تبقى متاحة للزوار غير المسجلين.
+- فيسبوك غير مدعوم كموفر تسجيل دخول من Clerk (فقط Google, GitHub, Apple, X)، والعمر غير متاح من بيانات حساب Google/Facebook القياسية — تم الاتفاق مع المستخدم على تجاهل هاتين النقطتين (Google فقط، بدون عمر).
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- بورتفوليو بالعربية بالكامل: Hero, Skills, Values, About, Projects, Experience, Education, Contact, Footer
+- منتقي لون التمييز (accent color) + وضع ليلي/نهاري، محفوظان في `localStorage`
+- الاسم والصورة الرئيسية قابلان للتخصيص: يدوياً (قلم تعديل / رفع صورة) أو تلقائياً عبر ربط حساب Google
+- نص متغير (typewriter) يعرض الأدوار المهنية تحت الصورة الرئيسية
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- كل المحتوى الظاهر للمستخدم بالعربية بالكامل، باستثناء أسماء التقنيات والعلامات التجارية القياسية (React, TypeScript, GitHub, إلخ) التي تبقى بلغتها الأصلية.
+- الاسم المعروض على الموقع قابل للتعديل من قبل الزائر (ليس ثابتاً في الكود).
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
-
-## Pointers
-
-- See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details
+- `resume.pdf` في `public/` هو ملف نصي عادي بامتداد `.pdf` وليس PDF حقيقي — يحتاج استبدال لاحقاً إذا كان زر "تحميل السيرة الذاتية" سيُستخدم فعلياً.
+- Clerk يعمل بمفاتيح تطوير (`pk_test`) في بيئة التطوير — هذا متوقع ولا يجب "تصحيحه"؛ يتم التبديل تلقائياً لمفاتيح الإنتاج عند النشر.

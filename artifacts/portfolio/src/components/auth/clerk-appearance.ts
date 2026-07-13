@@ -1,0 +1,52 @@
+import { shadcn } from "@clerk/themes";
+
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+export const clerkAppearance = {
+  theme: shadcn,
+  cssLayerName: "clerk",
+  options: {
+    logoPlacement: "inside" as const,
+    logoLinkUrl: basePath || "/",
+    logoImageUrl: `${window.location.origin}${basePath}/logo.svg`,
+  },
+  variables: {
+    colorPrimary: "hsl(260 100% 65%)",
+    colorForeground: "hsl(240 10% 10%)",
+    colorMutedForeground: "hsl(240 10% 40%)",
+    colorDanger: "hsl(0 84% 60%)",
+    colorBackground: "hsl(0 0% 100%)",
+    colorInput: "hsl(240 10% 96%)",
+    colorInputForeground: "hsl(240 10% 10%)",
+    colorNeutral: "hsl(240 10% 90%)",
+    fontFamily: "'Tajawal', 'Outfit', sans-serif",
+    borderRadius: "1rem",
+  },
+  elements: {
+    rootBox: "w-full flex justify-center",
+    cardBox: "bg-white rounded-2xl w-[440px] max-w-full overflow-hidden shadow-2xl",
+    card: "!shadow-none !border-0 !bg-transparent !rounded-none",
+    footer: "!shadow-none !border-0 !bg-transparent !rounded-none",
+    headerTitle: "text-2xl font-black text-[hsl(240_10%_10%)]",
+    headerSubtitle: "text-[hsl(240_10%_40%)]",
+    socialButtonsBlockButtonText: "font-semibold text-[hsl(240_10%_10%)]",
+    formFieldLabel: "font-medium text-[hsl(240_10%_20%)]",
+    footerActionLink: "text-[hsl(260_100%_55%)] font-bold hover:text-[hsl(260_100%_45%)]",
+    footerActionText: "text-[hsl(240_10%_40%)]",
+    dividerText: "text-[hsl(240_10%_40%)]",
+    identityPreviewEditButton: "text-[hsl(260_100%_55%)]",
+    formFieldSuccessText: "text-[hsl(152_76%_36%)]",
+    alertText: "text-[hsl(0_84%_45%)]",
+    logoBox: "mb-2",
+    logoImage: "rounded-xl w-14 h-14",
+    socialButtonsBlockButton: "border border-[hsl(240_10%_90%)] hover:bg-[hsl(240_10%_96%)] rounded-xl",
+    formButtonPrimary: "bg-[hsl(260_100%_65%)] hover:bg-[hsl(260_100%_55%)] rounded-xl font-bold",
+    formFieldInput: "rounded-xl border-[hsl(240_10%_90%)]",
+    footerAction: "gap-1",
+    dividerLine: "bg-[hsl(240_10%_90%)]",
+    alert: "rounded-xl",
+    otpCodeFieldInput: "rounded-xl border-[hsl(240_10%_90%)]",
+    formFieldRow: "mb-2",
+    main: "gap-4",
+  },
+};

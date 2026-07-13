@@ -1,0 +1,1 @@
+- [Clerk social-login provider gaps](clerk-social-login-gaps.md) — Clerk has no Facebook SSO and no OAuth "age" field; confirm with user before promising either.

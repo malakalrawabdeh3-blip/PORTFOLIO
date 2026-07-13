@@ -9,10 +9,12 @@ import { Experience } from "@/components/sections/Experience";
 import { Education } from "@/components/sections/Education";
 import { Contact } from "@/components/sections/Contact";
 import { ThemePicker } from "@/components/theme-picker";
+import { LinkAccountGate } from "@/components/auth/link-account-gate";
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
+      <LinkAccountGate />
       <Navbar />
       <main className="flex-1">
         <Hero />
