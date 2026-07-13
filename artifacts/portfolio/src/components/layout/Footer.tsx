@@ -1,6 +1,11 @@
 import { FiGithub, FiTwitter, FiLinkedin, FiHeart } from "react-icons/fi";
+import { useSiteName } from "@/components/site-name-provider";
 
 export function Footer() {
+  const { name } = useSiteName();
+  const nameParts = name.trim().split(/\s+/);
+  const firstName = nameParts[0] || name;
+  const restName = nameParts.slice(1).join(" ");
   const currentYear = new Date().getFullYear();
 
   return (
@@ -8,7 +13,7 @@ export function Footer() {
       <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
         
         <div className="text-2xl font-black tracking-tighter text-foreground">
-          هاشم<span className="text-primary">.الروابدة</span>
+          {firstName}{restName && <span className="text-primary">.{restName}</span>}
         </div>
         
         <p className="text-muted-foreground flex items-center gap-1 text-sm md:text-base text-center">

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { FiMenu, FiX } from "react-icons/fi";
+import { useSiteName } from "@/components/site-name-provider";
 
 const navLinks = [
   { name: "الرئيسية", href: "#home" },
@@ -13,6 +14,10 @@ const navLinks = [
 ];
 
 export function Navbar() {
+  const { name } = useSiteName();
+  const nameParts = name.trim().split(/\s+/);
+  const firstName = nameParts[0] || name;
+  const restName = nameParts.slice(1).join(" ");
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -61,7 +66,7 @@ export function Navbar() {
           onClick={(e) => scrollToSection(e, "#home")}
           className="text-2xl font-black tracking-tighter text-foreground"
         >
-          هاشم<span className="text-primary">.الروابدة</span>
+          {firstName}{restName && <span className="text-primary">.{restName}</span>}
         </a>
 
         {/* Desktop Nav */}

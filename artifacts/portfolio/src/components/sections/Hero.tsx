@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiGithub, FiTwitter, FiLinkedin, FiMail, FiArrowDown, FiCamera } from "react-icons/fi";
+import { FiGithub, FiTwitter, FiLinkedin, FiMail, FiArrowDown, FiCamera, FiEdit2, FiCheck } from "react-icons/fi";
 import { FaCode } from "react-icons/fa";
+import { useSiteName } from "@/components/site-name-provider";
 
 const roles = [
   "مطور واجهات أمامية",
@@ -12,9 +13,21 @@ const roles = [
 ];
 
 export function Hero() {
+  const { name, setName } = useSiteName();
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [nameInput, setNameInput] = useState(name);
   const [profileImage, setProfileImage] = useState<string>("/hero-portrait.jpg");
   const [roleIndex, setRoleIndex] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setNameInput(name);
+  }, [name]);
+
+  const saveName = () => {
+    setName(nameInput);
+    setIsEditingName(false);
+  };
 
   useEffect(() => {
     const savedImage = localStorage.getItem("portfolio-profile-image");
@@ -103,7 +116,39 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto md:mx-0 leading-relaxed"
           >
-            أنا هاشم، أدمج بين الكود النظيف والتصميم المذهل لبناء منتجات تترك انطباعاً لا يُنسى. دعنا نصنع المستقبل معاً.
+            أنا{" "}
+            {isEditingName ? (
+              <span className="inline-flex items-center gap-2 align-middle">
+                <input
+                  autoFocus
+                  value={nameInput}
+                  onChange={(e) => setNameInput(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && saveName()}
+                  onBlur={saveName}
+                  className="inline-block w-40 sm:w-48 bg-transparent border-b-2 border-primary text-primary font-bold outline-none px-1"
+                  aria-label="تعديل الاسم المعروض"
+                />
+                <button
+                  onClick={saveName}
+                  aria-label="حفظ الاسم"
+                  className="text-primary hover:text-primary/80"
+                >
+                  <FiCheck size={18} />
+                </button>
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 align-middle">
+                <span className="text-primary font-bold">{name}</span>
+                <button
+                  onClick={() => setIsEditingName(true)}
+                  aria-label="تعديل الاسم المعروض"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <FiEdit2 size={14} />
+                </button>
+              </span>
+            )}
+            ، أدمج بين الكود النظيف والتصميم المذهل لبناء منتجات تترك انطباعاً لا يُنسى. دعنا نصنع المستقبل معاً.
           </motion.p>
 
           <motion.div 
